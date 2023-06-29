@@ -1,6 +1,5 @@
-import {writeFile} from 'fs/promises';
-// import { promises as fs } from "fs";
-
+// import * as fs from 'fs/promises';
+import { writeFile } from 'fs/promises';
 import { Http2ServerRequest } from 'http2';
 // @ts-ignore TS6133
 import { userData } from './types.ts';

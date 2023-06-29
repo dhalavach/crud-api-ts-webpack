@@ -11,7 +11,7 @@ import {
 } from './controllers/usersController.ts';
 
 //console.log(process.NODE_ENV);
-const server = http.createServer((req: any, res: any) => {
+export const server = http.createServer((req: any, res: any) => {
   if (req.url === '/api/users' && req.method === 'GET') {
     getUsers(res);
   } else if (
