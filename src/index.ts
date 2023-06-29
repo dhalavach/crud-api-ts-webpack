@@ -10,6 +10,8 @@ import {
   deleteUser,
   // @ts-ignore TS6133
 } from './controllers/usersController.ts';
+//@ts-ignore
+import { balancer } from './load-balancer/balancer.ts';
 
 //console.log(process.NODE_ENV);
 export const server = http.createServer((req: any, res: any) => {
@@ -42,7 +44,6 @@ export const server = http.createServer((req: any, res: any) => {
 });
 // let PORT = process.env.PORT || 7480;
 const PORT = 5000;
-
 server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
