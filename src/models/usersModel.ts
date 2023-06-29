@@ -5,13 +5,7 @@ import { writeToFile } from '../helpers.ts';
 // @ts-ignore TS6133
 import { userData, user } from '../types.ts';
 
-// const isUuid = (id: string) => {
-//   return !!id;
-// };
 
-// const uuid = () => {
-// return '12345'
-// }
 
 export const getAllUsers = () => {
   return new Promise((resolve) => {

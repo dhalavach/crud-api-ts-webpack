@@ -2,9 +2,11 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "ESNext",
     "moduleResolution": "NodeNext",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    // "allowImportingTsExtensions": true,
+    // "emitDeclarationOnly": true,
+    // "declaration": true
   }
 }

@@ -1,5 +1,6 @@
-// import * as fs from 'fs/promises';
-import { writeFile } from 'fs/promises';
+import * as fs from 'fs/promises';
+// import * as fs from 'node:fs/promises';
+
 import { Http2ServerRequest } from 'http2';
 // @ts-ignore TS6133
 import { userData } from './types.ts';
@@ -23,7 +24,7 @@ export const getPostData = async (req: Http2ServerRequest): Promise<string> => {
 };
 
 export const writeToFile = async (name: any, data: any) => {
-  await writeFile(name, JSON.stringify(data), 'utf8');
+  await fs.writeFile(name, JSON.stringify(data), 'utf8');
 };
 
 export const checkIfRequiredFieldsArePresent = (userInfo: userData) => {

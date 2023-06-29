@@ -23,9 +23,6 @@ export const balancer = async (req: any, res: any) => {
       
 
     },
-    (res) => {
-        // Делаем что-нибудь с ответом
-    }
 
     )
   } catch (err) {

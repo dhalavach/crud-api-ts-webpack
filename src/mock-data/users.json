@@ -125,8 +125,8 @@
   },
   {
     "id": "b6b3f0ab-4ef5-4240-a947-dc41778f32a0",
-    "username": "jane doe",
-    "age": 45,
+    "username": "jane",
+    "age": 25,
     "hobbies": ["swimming"]
   },
   {
@@ -134,5 +134,11 @@
     "username": "jane doe",
     "age": 35,
     "hobbies": ["swimming"]
+  },
+  {
+    "id": "95f1b39c-161f-4e9e-be35-3be582f190d6",
+    "username": "mock user",
+    "age": 18,
+    "hobbies": ["none"]
   }
 ]
