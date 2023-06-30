@@ -25,23 +25,23 @@ const maxThreads = cpus().length - 1; //availableParallelism is not used due to 
 const multithreaded = parseArg('multi');
 
 if (multithreaded === 'true') {
-  const spawnChildProcess = async (arg: any) => {
+  const spawnChildProcess = (arg: any) => {
     const child = fork('./src/server.ts', ['--port', `${arg}`], {
-      silent: false,
+      silent: true,
     });
     console.log('spawned a child process');
 
-    // process.stdin.pipe(child.stdin);
-    // child.stdout.pipe(process.stdout);
+    process.stdin.pipe(child.stdin);
+    child.stdout.pipe(process.stdout);
 
-    // child.stdout.on('data', (chunk) => {
-    //   process.stdout.write(`Received from child process: ${chunk}`);
-    // });
+    child.stdout.on('data', (chunk) => {
+      process.stdout.write(`Received from child process: ${chunk}`);
+    });
   };
 
   let port;
   for (let i = 0; i < maxThreads; i++) {
-    port = 5001 + i;
+    port = 4001 + i;
     spawnChildProcess(port);
   }
 } else {

@@ -1,10 +1,13 @@
 import * as http from 'http';
 import { getPostData as getBodyData } from '../helpers.js';
 import cluster from 'cluster';
+import { cpus } from 'os';
 export const balancer = async (req: any, res: any) => {
+
   const servers = [
-    `http://localhost:${process.env.PORT + 1}`,
-    `http://localhost:${process.env.PORT + 2}`,
+    `http://localhost:5001`,
+    `http://localhost:5002`,
+    `http://localhost:5003`
   ];
   let currentServerIndex = 0;
   let server;

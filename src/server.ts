@@ -12,13 +12,14 @@ import {
   updateUser,
   deleteUser,
   // @ts-ignore TS6133
-} from './controllers/usersController.js';
+} from './controllers/usersController.ts';
 //@ts-ignore
 import { parseArg } from './helpers.ts';
+import { parseArgs } from 'util';
 
 export const server = async () => {
   // console.log(process.argv);
-  const port = parseArg('port') || process.env.PORT;
+  const port = parseArg('port') || 5001;
   // const port = Number(process.argv[2]);
   console.log(`process with ${process.pid} has started`);
   const server = http.createServer((req: any, res: any) => {
@@ -49,11 +50,17 @@ export const server = async () => {
       res.end(JSON.stringify({ message: 'Resource not found!' }));
     }
   });
-  //@ts-ignore
-  // let port = Math.floor(Math.random() * 10000);
   server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
   });
+
+  const echoInput = (chunk: any) => {
+    const chunkStringified = chunk.toString();
+    if (chunkStringified.includes('CLOSE')) process.exit(0);
+    process.stdout.write(`Received from master process: ${chunk.toString()}\n`);
+  };
+
+  process.stdin.on('data', echoInput);
 };
 
 server();
