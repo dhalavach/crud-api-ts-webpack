@@ -5,6 +5,7 @@
     "module": "ESNext",
     "moduleResolution": "NodeNext",
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
     // "allowImportingTsExtensions": true,
     // "emitDeclarationOnly": true,
     // "declaration": true

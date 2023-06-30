@@ -9,6 +9,7 @@ import {
 // @ts-ignore TS6133
 import { getPostData, checkIfRequiredFieldsArePresent } from '../helpers.ts';
 import { isUuid } from 'uuidv4';
+import { userData } from '../types.js';
 
 // const isUuid = (id: string) => {
 //   return !!id;
@@ -82,7 +83,7 @@ export const updateUser = async (req: any, res: any, id: string) => {
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'user id is not a valid UUID' }));
     } else {
-      const user = await getUserById(id);
+      const user = await getUserById(id) as userData;
 
       if (!user) {
         res.writeHead(404, { 'Content-Type': 'application/json' });

@@ -13,3 +13,5 @@ The server will be listening on port 5000 (by default).
 There is no frontend with UI, please use Postman for testing
 
 Cheers!
+
+if you have any questions, please email halavach@protonmail.com 

@@ -27,6 +27,11 @@ export const writeToFile = async (name: any, data: any) => {
   await fs.writeFile(name, JSON.stringify(data), 'utf8');
 };
 
+export const readFromFile = async (filePath: any) => {
+  const result = await fs.readFile(filePath, 'utf-8');
+  return JSON.parse(result);
+};
+
 export const checkIfRequiredFieldsArePresent = (userInfo: userData) => {
   if (userInfo.username && userInfo.age && userInfo.hobbies) return true;
   else return false;

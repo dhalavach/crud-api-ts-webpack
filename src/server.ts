@@ -26,24 +26,27 @@ export const server = async () => {
     if (req.url === '/api/users' && req.method === 'GET') {
       getUsers(res);
     } else if (
-      req.url?.match(/\/api\/users\/user\/[a-zA-Z0-9]+/) &&
+      req.url?.match(/\/api\/users\/[a-zA-Z0-9]+/) &&
       req.method === 'GET'
     ) {
-      const userId = req.url.split('/')[4];
+      const userId = req.url.split('/')[3];
       getUser(res, userId);
     } else if (req.url === '/api/users' && req.method === 'POST') {
       createUser(req, res);
     } else if (
-      req.url?.match(/\/api\/users\/user\/[a-zA-Z0-9]+/) &&
+      req.url?.match(/\/api\/users\/[a-zA-Z0-9]+/) &&
       req.method === 'PUT'
     ) {
-      const id = req.url.split('/')[4];
+      const id = req.url.split('/')[3];
+      console.log('parsed put id: '+ id)
       updateUser(req, res, id);
     } else if (
-      req.url?.match(/\/api\/users\/user\/[a-zA-Z0-9]+/) &&
+      req.url?.match(/\/api\/users\/[a-zA-Z0-9]+/) &&
       req.method === 'DELETE'
     ) {
-      const id = req.url.split('/')[4];
+      const id = req.url.split('/')[3];
+      console.log('parsed delete id: '+ id)
+
       deleteUser(res, id);
     } else {
       res.writeHead(404, { 'Content-Type': 'application/json' });
