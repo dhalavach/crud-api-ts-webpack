@@ -12,9 +12,9 @@ import {
   updateUser,
   deleteUser,
   // @ts-ignore TS6133
-} from './controllers/usersController.ts';
+} from './controllers/usersController.js';
 //@ts-ignore
-import { parseArg } from './helpers.ts';
+import { parseArg } from './helpers.js';
 import { parseArgs } from 'util';
 
 export const server = async () => {
@@ -63,3 +63,4 @@ export const server = async () => {
   process.stdin.on('data', echoInput);
 };
 
+server()

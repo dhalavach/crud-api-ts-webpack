@@ -6,6 +6,7 @@ import process from 'process';
 import { spawn, exec, execFile, fork } from 'child_process';
 //@ts-ignore
 import { server } from './server.ts';
+
 //@ts-ignore
 import { parseArg } from './helpers.ts';
 import 'dotenv/config.js';
@@ -26,7 +27,7 @@ const multithreaded = parseArg('multi');
 
 if (multithreaded === 'true') {
   const spawnChildProcess = (arg: any) => {
-    const child = fork('./src/server.ts', ['--port', `${arg}`], {
+    const child = fork('./src/server-multi.ts', ['--port', `${arg}`], {
       silent: true,
     });
     console.log('spawned a child process');
