@@ -11,7 +11,7 @@ const userToDelete = {
 describe('PUT /api/users/user', function () {
   it('responds with code 204 after valid DELETE request', function (done) {
     request('http://localhost:5000')
-      .delete(`/api/users/user/${userToDelete.id}`)
+      .delete(`/api/users/${userToDelete.id}`)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(204)

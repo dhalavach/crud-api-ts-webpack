@@ -11,7 +11,7 @@ const userToUpdate = {
 describe('PUT /api/users/user', function () {
   it('responds with code 200 after valid PUT request', function (done) {
     request('http://localhost:5000')
-      .put(`/api/users/user/${userToUpdate.id}`)
+      .put(`/api/users/${userToUpdate.id}`)
       .send({
         username: 'john',
         age: 20,
