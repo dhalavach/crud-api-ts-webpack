@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { server } = require('./../../src/index');
+// const { server } = require('./../../src/server');
 
 const userToDelete = {
   id: 'cdc82f7f-be13-413b-92d5-0446c228973d',
@@ -10,7 +10,7 @@ const userToDelete = {
 
 describe('PUT /api/users/user', function () {
   it('responds with code 204 after valid DELETE request', function (done) {
-    request(server)
+    request('http://localhost:5000')
       .delete(`/api/users/user/${userToDelete.id}`)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -21,4 +21,3 @@ describe('PUT /api/users/user', function () {
       });
   });
 });
-server.close();

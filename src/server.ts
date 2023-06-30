@@ -19,9 +19,9 @@ import { parseArgs } from 'util';
 
 export const server = async () => {
   // console.log(process.argv);
-  const port = parseArg('port') || process.env.PORT || 5000;
+  const port = parseArg('port') || 5000;
   // const port = Number(process.argv[2]);
-  console.log(`process with ${process.pid} has started`);
+  // console.log(`process with ${process.pid} has started`);
   const server = http.createServer((req: any, res: any) => {
     if (req.url === '/api/users' && req.method === 'GET') {
       getUsers(res);
@@ -54,12 +54,11 @@ export const server = async () => {
     console.log(`Server listening on port ${port}`);
   });
 
-  const echoInput = (chunk: any) => {
-    const chunkStringified = chunk.toString();
-    if (chunkStringified.includes('CLOSE')) process.exit(0);
-    process.stdout.write(`Received from master process: ${chunk.toString()}\n`);
-  };
+  // const echoInput = (chunk: any) => {
+  //   const chunkStringified = chunk.toString();
+  //   if (chunkStringified.includes('CLOSE')) process.exit(0);
+  //   process.stdout.write(`Received from master process: ${chunk.toString()}\n`);
+  // };
 
-  process.stdin.on('data', echoInput);
+  // process.stdin.on('data', echoInput);
 };
-

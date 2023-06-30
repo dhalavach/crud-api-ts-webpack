@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --no-cache  --detectOpenHandles --runInBand --forceExit",
     "start:dev": "ts-node --esm src/index.ts --multi false",
     "start:multi": "ts-node --esm src/index.ts --multi true",
     "start:prod": "node dist/bundle.cjs --multi true",

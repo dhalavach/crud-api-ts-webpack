@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { server } = require('./../../src/index');
+// const { server } = require('./../../src/server');
 
 const userToUpdate = {
   id: 'b692d879-0f49-4d4a-ad82-e3262729c852',
@@ -10,7 +10,7 @@ const userToUpdate = {
 
 describe('PUT /api/users/user', function () {
   it('responds with code 200 after valid PUT request', function (done) {
-    request(server)
+    request('http://localhost:5000')
       .put(`/api/users/user/${userToUpdate.id}`)
       .send({
         username: 'john',
@@ -26,4 +26,3 @@ describe('PUT /api/users/user', function () {
       });
   });
 });
-server.close();
