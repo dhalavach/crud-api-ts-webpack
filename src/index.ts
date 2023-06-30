@@ -1,5 +1,13 @@
 import * as http from 'http';
-
+import { Worker } from 'worker_threads';
+import cluster from 'cluster';
+import { cpus } from 'os';
+import process from 'process';
+import { spawn, exec, execFile, fork } from 'child_process';
+//@ts-ignore
+import { server } from './server.ts';
+//@ts-ignore
+import { parseArg } from './helpers.ts';
 import 'dotenv/config.js';
 // import users from './mock-data/users.json' assert { type: 'json' };
 import {
@@ -9,41 +17,33 @@ import {
   updateUser,
   deleteUser,
   // @ts-ignore TS6133
-} from './controllers/usersController.ts';
+} from './controllers/usersController.js';
 //@ts-ignore
-import { balancer } from './load-balancer/balancer.ts';
+import { balancer } from './load-balancer/balancer.js';
 
-//console.log(process.NODE_ENV);
-export const server = http.createServer((req: any, res: any) => {
-  if (req.url === '/api/users' && req.method === 'GET') {
-    getUsers(res);
-  } else if (
-    req.url?.match(/\/api\/users\/user\/[a-zA-Z0-9]+/) &&
-    req.method === 'GET'
-  ) {
-    const userId = req.url.split('/')[4];
-    getUser(res, userId);
-  } else if (req.url === '/api/users' && req.method === 'POST') {
-    createUser(req, res);
-  } else if (
-    req.url?.match(/\/api\/users\/user\/[a-zA-Z0-9]+/) &&
-    req.method === 'PUT'
-  ) {
-    const id = req.url.split('/')[4];
-    updateUser(req, res, id);
-  } else if (
-    req.url?.match(/\/api\/users\/user\/[a-zA-Z0-9]+/) &&
-    req.method === 'DELETE'
-  ) {
-    const id = req.url.split('/')[4];
-    deleteUser(res, id);
-  } else {
-    res.writeHead(404, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'Resource not found!' }));
+const maxThreads = cpus().length - 1; //availableParallelism is not used due to limited support
+const multithreaded = parseArg('multi');
+
+if (multithreaded === 'true') {
+  const spawnChildProcess = async (arg: any) => {
+    const child = fork('./src/server.ts', ['--port', `${arg}`], {
+      silent: false,
+    });
+    console.log('spawned a child process');
+
+    // process.stdin.pipe(child.stdin);
+    // child.stdout.pipe(process.stdout);
+
+    // child.stdout.on('data', (chunk) => {
+    //   process.stdout.write(`Received from child process: ${chunk}`);
+    // });
+  };
+
+  let port;
+  for (let i = 0; i < maxThreads; i++) {
+    port = 5001 + i;
+    spawnChildProcess(port);
   }
-});
-// let PORT = process.env.PORT || 7480;
-const PORT = 5000;
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
+} else {
+  server();
+}

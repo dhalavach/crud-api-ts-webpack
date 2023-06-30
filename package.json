@@ -6,7 +6,8 @@
   "main": "./src/index.ts",
   "scripts": {
     "test": "jest",
-    "start:dev": "ts-node --esm src/index.ts",
+    "start:dev": "ts-node --esm src/index.ts --multi false",
+    "start:multi": "ts-node --esm src/index.ts --multi true",
     "start:prod": "node dist/bundle.cjs",
     "build": "webpack --mode production"
   },

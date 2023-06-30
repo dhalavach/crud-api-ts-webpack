@@ -31,3 +31,22 @@ export const checkIfRequiredFieldsArePresent = (userInfo: userData) => {
   if (userInfo.username && userInfo.age && userInfo.hobbies) return true;
   else return false;
 };
+
+export const parseArg = (arg: string) => {
+  const PREFIX = '--';
+  let props = {};
+
+  for (let i = 2; i < process.argv.length; i++) {
+    let arg = process.argv[i];
+
+    if (arg.startsWith(PREFIX)) {
+      let propName = arg.slice(2);
+      let propValue = process.argv[i + 1];
+      //@ts-ignore
+      props[propName] = propValue;
+      i++;
+    }
+  }
+  //@ts-ignore
+  return props[arg];
+};
