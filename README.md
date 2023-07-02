@@ -14,6 +14,7 @@ to do and start production build:
 2. npm run start:prod
 
 The server will be listening on port 5000 (by default).
+The address will be like http://localhost:5000/api/users
 There is no frontend with UI, please use Postman for testing
 
 Cheers!

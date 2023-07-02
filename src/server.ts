@@ -38,14 +38,14 @@ export const server = async () => {
       req.method === 'PUT'
     ) {
       const id = req.url.split('/')[3];
-      console.log('parsed put id: '+ id)
+      console.log('parsed put id: ' + id);
       updateUser(req, res, id);
     } else if (
       req.url?.match(/\/api\/users\/[a-zA-Z0-9]+/) &&
       req.method === 'DELETE'
     ) {
       const id = req.url.split('/')[3];
-      console.log('parsed delete id: '+ id)
+      console.log('parsed delete id: ' + id);
 
       deleteUser(res, id);
     } else {

@@ -6,7 +6,8 @@
   "main": "./src/index.ts",
   "scripts": {
     "test": "jest --no-cache  --detectOpenHandles --runInBand --forceExit",
-    "start:dev": "ts-node --esm src/index.ts --multi false",
+    "start": "ts-node --esm src/index.ts --multi false",
+    "start:dev": "npx nodemon",
     "start:multi": "ts-node --esm src/index.ts --multi true",
     "start:prod": "node dist/bundle.cjs --multi true",
     "build": "webpack --mode production"

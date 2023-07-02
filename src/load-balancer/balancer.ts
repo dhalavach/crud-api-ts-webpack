@@ -1,3 +1,5 @@
+// not implemented correctly yet!
+
 import * as http from 'http';
 import { getPostData as getBodyData } from '../helpers.js';
 import cluster from 'cluster';
