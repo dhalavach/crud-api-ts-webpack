@@ -20,11 +20,13 @@ import {
   // @ts-ignore TS6133
 } from './controllers/usersController.js';
 //@ts-ignore
-import { balancer } from './load-balancer/balancer.js';
+import { balancer } from './load-balancer/balancer.ts';
 
 const maxThreads = cpus().length - 1; //availableParallelism is not used due to limited support
 const multithreaded = parseArg('multi');
-
+const balancerServer = http.createServer((res, req) => {
+  balancer(res, req);
+});
 if (multithreaded === 'true') {
   const spawnChildProcess = (arg: any) => {
     const child = fork('./src/server-multi.ts', ['--port', `${arg}`], {
@@ -45,6 +47,9 @@ if (multithreaded === 'true') {
     port = 4001 + i;
     spawnChildProcess(port);
   }
+  balancerServer.listen(5000, () => {
+    console.log(`Server listening on port ${5000}`);
+  });
 } else {
   server();
 }
