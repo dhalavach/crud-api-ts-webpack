@@ -54,7 +54,7 @@ export const balancer = (port: number): void => {
     });
 
     balancerServer.listen(port, () => {
-      console.log(`balancer server is listening on ${port}`);
+      console.log(`Balancer is listening on ${port}`);
     });
   } else {
     const wtPort = parseInt(process.env.worker_port) || 5001;
