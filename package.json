@@ -1,7 +1,7 @@
 {
   "name": "crud-api-ts-webpack",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple CRUD API task for 2023 RS School Node.js course ",
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
@@ -13,8 +13,8 @@
     "build": "webpack --mode production"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Dmitry Halavach",
+  "license": "MIT",
   "devDependencies": {
     "@jest/globals": "^29.5.0",
     "@types/jest": "^29.5.2",
