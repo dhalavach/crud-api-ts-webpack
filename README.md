@@ -9,7 +9,7 @@ to start the server in dev mode with nodemon: `npm run start:dev`
 
 to start the server listening on single port: `npm run start`
 
-to start the server in multi mode listening on several ports: `npm run start:multi`
+to start the server in multi mode with load balancer: `npm run start:multi`
 
 to run tests: `npm run test`
 
@@ -20,7 +20,7 @@ to build and start production build:
 
 
 The server will be listening on port 5000 (in single mode, by default).
-In multi mode, servers will be accessible on 4001, 4002, 4003
+In multi mode, the balancer will listen on 5000 and worker servers will be accessible on 5001, 5002, 5003 ... (depending on the .env file configuration)
 Also see the console output ('The server is listening ...')
 The address will be like http://localhost:5000/api/users
 There is no frontend with UI, please use Postman for testing

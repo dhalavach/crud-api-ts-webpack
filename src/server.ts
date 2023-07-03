@@ -1,18 +1,23 @@
 import * as http from 'http';
-import 'dotenv/config.js';
+// import { Worker } from 'worker_threads';
+// import cluster from 'cluster';
+// import { cpus } from 'os';
+// import process from 'process';
+// import 'dotenv/config.js';
+// import users from './mock-data/users.json' assert { type: 'json' };
 import {
   getUsers,
   getUser,
   createUser,
   updateUser,
   deleteUser,
-  // @ts-ignore TS6133
+  //@ts-ignore
 } from './controllers/usersController.ts';
-//@ts-ignore
-import { parseArg } from './helpers.ts';
 
-export const server = async () => {
-  const port = parseArg('port') || 5000;
+export const server = async (port: number) => {
+  // console.log(process.argv);
+  // const port = Number(process.argv[2]);
+  // console.log(`process with ${process.pid} has started`);
   const server = http.createServer(
     (req: http.IncomingMessage, res: http.ServerResponse) => {
       if (req.url === '/api/users' && req.method === 'GET') {
