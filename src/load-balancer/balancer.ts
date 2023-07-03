@@ -3,7 +3,7 @@ import cluster from 'cluster';
 //@ts-ignore
 import { server } from './../server.ts';
 import { cpus } from 'os';
-export const balancer = (port: number) => {
+export const balancer = (port: number): void => {
   const maxWorkers = cpus().length - 1; //availableParallelism is not used due to limited support
 
   if (cluster.isPrimary) {
@@ -12,7 +12,7 @@ export const balancer = (port: number) => {
 
     for (let i = 0; i < maxWorkers; i++) {
       const wp = port + 1 + i;
-      cluster.fork({ WORKER_PORT: wp });
+      cluster.fork({ worker_port: wp });
       workerPortArray.push(wp);
     }
 
@@ -57,7 +57,7 @@ export const balancer = (port: number) => {
       console.log(`balancer server is listening on ${port}`);
     });
   } else {
-    const wtPort = parseInt(process.env.WORKER_PORT) || 4001;
+    const wtPort = parseInt(process.env.worker_port) || 5001;
     server(wtPort);
   }
 };

@@ -3,6 +3,9 @@ Simple CRUD API
 All dependencies are in accordance with the task requirements (uuid is allowed in the task description; ts-loader, node-polyfill-webpack-plugin, webpack-cli and webpack-dev-server are webpack plugins; @types ... extension are also allowed; jest and ts-jest are used for testing )
 
 Clone the repository
+
+Switch to the develop branch
+
 Do the `npm install`
 
 to start the server in dev mode with nodemon: `npm run start:dev`
