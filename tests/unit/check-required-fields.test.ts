@@ -1,5 +1,6 @@
 import { test, expect } from '@jest/globals';
-import { userData } from '../../src/types.js';
+//@ts-ignore
+import { userData } from '../../src/types.ts';
 export const checkIfRequiredFieldsArePresent = (userInfo: userData) => {
   if (userInfo.username && userInfo.age && userInfo.hobbies) return true;
   else return false;
