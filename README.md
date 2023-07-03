@@ -26,5 +26,7 @@ The address will be like http://localhost:5000/api/users
 There is no frontend with UI, please use Postman for testing
 
 
+Code on the main and develop branches is mostly identical; I have created a pull request mostly to fulfil RS School task requirement. Just clone and test the main branch!
+
 if you have any questions, please email halavach@protonmail.com
 Cheers!
