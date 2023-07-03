@@ -10,12 +10,9 @@ import {
 import { getPostData, checkIfRequiredFieldsArePresent } from '../helpers.ts';
 import { isUuid } from 'uuidv4';
 import { userData } from '../types.js';
+import { IncomingMessage, ServerResponse } from 'http';
 
-// const isUuid = (id: string) => {
-//   return !!id;
-// };
-
-export const getUsers = async (res: any) => {
+export const getUsers = async (res: ServerResponse) => {
   try {
     const users = await getAllUsers();
     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -25,7 +22,7 @@ export const getUsers = async (res: any) => {
   }
 };
 
-export const getUser = async (res: any, id: string) => {
+export const getUser = async (res: ServerResponse, id: string) => {
   try {
     if (!isUuid(id)) {
       res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -47,7 +44,7 @@ export const getUser = async (res: any, id: string) => {
   }
 };
 
-export const createUser = async (req: any, res: any) => {
+export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
   try {
     const body = await getPostData(req);
 
@@ -77,13 +74,17 @@ export const createUser = async (req: any, res: any) => {
   }
 };
 
-export const updateUser = async (req: any, res: any, id: string) => {
+export const updateUser = async (
+  req: IncomingMessage,
+  res: ServerResponse,
+  id: string
+) => {
   try {
     if (!isUuid(id)) {
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'user id is not a valid UUID' }));
     } else {
-      const user = await getUserById(id) as userData;
+      const user = (await getUserById(id)) as userData;
 
       if (!user) {
         res.writeHead(404, { 'Content-Type': 'application/json' });
@@ -110,7 +111,7 @@ export const updateUser = async (req: any, res: any, id: string) => {
   }
 };
 
-export const deleteUser = async (res: any, id: string) => {
+export const deleteUser = async (res: ServerResponse, id: string) => {
   try {
     if (!isUuid(id)) {
       res.writeHead(400, { 'Content-Type': 'application/json' });

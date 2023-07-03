@@ -1,11 +1,9 @@
 import * as fs from 'fs/promises';
-// import * as fs from 'node:fs/promises';
-
-import { Http2ServerRequest } from 'http2';
 // @ts-ignore TS6133
 import { userData } from './types.ts';
+import { IncomingMessage } from 'http';
 
-export const getPostData = async (req: Http2ServerRequest): Promise<string> => {
+export const getPostData = async (req: IncomingMessage): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
       let body = '';
@@ -32,26 +30,34 @@ export const readFromFile = async (filePath: any) => {
   return JSON.parse(result);
 };
 
-export const checkIfRequiredFieldsArePresent = (userInfo: userData) => {
-  if (userInfo.username && userInfo.age && userInfo.hobbies) return true;
-  else return false;
+export const checkIfRequiredFieldsArePresent = (
+  userInfo: userData
+): boolean => {
+  if (
+    typeof userInfo.username === 'string' &&
+    typeof userInfo.age === 'number' &&
+    Array.isArray(userInfo.hobbies) &&
+    userInfo.hobbies.every((val) => typeof val === 'string')
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 export const parseArg = (arg: string) => {
   const PREFIX = '--';
-  let props = {};
+  const props = new Map();
 
   for (let i = 2; i < process.argv.length; i++) {
-    let arg = process.argv[i];
+    const arg = process.argv[i];
 
     if (arg.startsWith(PREFIX)) {
-      let propName = arg.slice(2);
-      let propValue = process.argv[i + 1];
-      //@ts-ignore
-      props[propName] = propValue;
+      const propName = arg.slice(2);
+      const propValue = process.argv[i + 1];
+      props.set(propName, propValue);
       i++;
     }
   }
-  //@ts-ignore
-  return props[arg];
+  return props.get(arg);
 };
