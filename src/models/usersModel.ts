@@ -1,4 +1,6 @@
-import { uuid } from 'uuidv4';
+// import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
+
 // @ts-ignore TS6133
 import { readFromFile, writeToFile } from '../helpers.ts';
 // @ts-ignore TS6133
@@ -24,7 +26,7 @@ export const create = async (user: userData): Promise<user | undefined> => {
   const users = await readFromFile('./src/mock-data/users.json');
 
   return new Promise((resolve) => {
-    const newUser = { id: uuid(), ...user };
+    const newUser = { id: uuidv4(), ...user };
     //@ts-ignore
     users.push(newUser);
     if (process.env.NODE_ENV !== 'test') {

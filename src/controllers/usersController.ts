@@ -8,7 +8,7 @@ import {
 } from '../models/usersModel.ts';
 // @ts-ignore TS6133
 import { getPostData, checkIfRequiredFieldsArePresent } from '../helpers.ts';
-import { isUuid } from 'uuidv4';
+import { validate } from 'uuid';
 import { userData } from '../types.js';
 import { IncomingMessage, ServerResponse } from 'http';
 
@@ -24,7 +24,7 @@ export const getUsers = async (res: ServerResponse) => {
 
 export const getUser = async (res: ServerResponse, id: string) => {
   try {
-    if (!isUuid(id)) {
+    if (!validate(id)) {
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.end(
         JSON.stringify({ message: 'User id is not valid (not a uuid)!' })
@@ -80,7 +80,7 @@ export const updateUser = async (
   id: string
 ) => {
   try {
-    if (!isUuid(id)) {
+    if (!validate(id)) {
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'user id is not a valid UUID' }));
     } else {
@@ -113,7 +113,7 @@ export const updateUser = async (
 
 export const deleteUser = async (res: ServerResponse, id: string) => {
   try {
-    if (!isUuid(id)) {
+    if (!validate(id)) {
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'user id is not a valid UUID' }));
     } else {
